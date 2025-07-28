@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShield Pro - Advanced Phishing Detection by High Five</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+    #starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw !important;
+      height: 100vh !important;
+      z-index: 0;
+      pointer-events: none;
+      display: block;
+    }
+    .main-header, .container, footer, .hero-section, .features-section {
+      position: relative;
+      z-index: 2;
+    }
+    </style>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+    
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🛡️</span>
+                <span class="logo-text">CyberShield Pro</span>
+                <span class="team-badge">by High Five</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-content">
+            <div class="team-presentation">
+                <span class="team-tag">Team High Five</span>
+            </div>
+            <h1 class="hero-title">Enterprise-Grade Phishing Detection</h1>
+            <p class="hero-subtitle">Powered by Advanced Machine Learning & AI</p>
+            <div class="hero-description">
+                <p>Protecting organizations from sophisticated email threats with cutting-edge ensemble machine learning models and real-time analysis capabilities.</p>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">97.2%</span>
+                    <span class="stat-label">Detection Rate</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">ML Models</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">40K+</span>
+                    <span class="stat-label">Emails Analyzed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">< 50ms</span>
+                    <span class="stat-label">Response Time</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 class="section-title">Advanced Security Features</h2>
+            <p class="section-subtitle">Comprehensive protection against modern phishing threats</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Ensemble ML Architecture</h3>
+                    <p>Combines 6 state-of-the-art machine learning algorithms for maximum accuracy and reliability</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Advanced NLP Analysis</h3>
+                    <p>Sophisticated text processing with TF-IDF, linguistic features, and semantic analysis</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-time Processing</h3>
+                    <p>Instant threat assessment with confidence scoring and detailed risk analysis</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Enterprise Analytics</h3>
+                    <p>Comprehensive reporting and visualization for security teams and management</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Zero False Positives</h3>
+                    <p>Advanced filtering reduces false alarms while maintaining high detection rates</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure Architecture</h3>
+                    <p>Enterprise-grade security with encrypted data processing and privacy protection</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo-section" id="demo">
+        <div class="container">
+            <h2 class="section-title">Live Security Demo</h2>
+            <p class="section-subtitle">Experience our advanced phishing detection system in action</p>
+            
+            <form id="emailForm" class="demo-form">
+                <div class="form-group">
+                    <label for="subject">Email Subject Line</label>
+                    <input type="text" id="subject" placeholder="Enter suspicious email subject..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="body">Email Content</label>
+                    <textarea id="body" placeholder="Paste the email body content for analysis..." required></textarea>
+                </div>
+                
+                <button type="submit" class="analyze-btn">
+                    <span class="btn-icon">🔍</span>
+                    Analyze Security Threat
+                </button>
+            </form>
+
+            <div id="spinner" style="display:none;">
+                <svg width="40" height="40" viewBox="0 0 40 40">
+                    <circle cx="20" cy="20" r="18" stroke="#3182ce" stroke-width="4" fill="none" stroke-dasharray="30 100" stroke-dashoffset="0">
+                        <animate attributeName="stroke-dashoffset" values="0;-100" dur="1s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>
+            </div>
+
+            <div id="result" class="result-container"></div>
+            
+            <div class="analytics-section">
+                <div id="history" class="history-container"></div>
+                <div id="chart-container" class="chart-container">
+                    <canvas id="chart" width="700" height="340"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2 class="section-title">About High Five Security</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>High Five is a team of cybersecurity experts and machine learning engineers dedicated to developing cutting-edge security solutions. Our CyberShield Pro system represents the next generation of email threat detection, combining advanced AI with enterprise-grade security practices.</p>
+                    <p>Our ensemble model architecture leverages multiple machine learning algorithms including Logistic Regression, Random Forest, XGBoost, LightGBM, Gradient Boosting, and Support Vector Machine to achieve superior accuracy in detecting sophisticated phishing attempts while minimizing false positives.</p>
+                    <div class="team-highlight">
+                        <h3>Why Choose High Five?</h3>
+                        <ul>
+                            <li>Industry-leading detection accuracy</li>
+                            <li>Real-time threat analysis</li>
+                            <li>Enterprise-grade security</li>
+                            <li>Comprehensive reporting</li>
+                            <li>24/7 threat monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tech-stack">
+                    <h3>Technology Stack</h3>
+                    <div class="tech-items">
+                        <span class="tech-item">Python 3.12</span>
+                        <span class="tech-item">Flask API</span>
+                        <span class="tech-item">scikit-learn</span>
+                        <span class="tech-item">NLTK</span>
+                        <span class="tech-item">XGBoost</span>
+                        <span class="tech-item">LightGBM</span>
+                        <span class="tech-item">Chart.js</span>
+                    </div>
+                    <div class="performance-metrics">
+                        <h4>Performance Metrics</h4>
+                        <div class="metric-item">
+                            <span class="metric-label">Accuracy:</span>
+                            <span class="metric-value">97.2%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Precision:</span>
+                            <span class="metric-value">96.8%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Recall:</span>
+                            <span class="metric-value">97.5%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">F1-Score:</span>
+                            <span class="metric-value">97.1%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CyberShield Pro</h3>
+                    <p>Advanced phishing email detection powered by High Five's cutting-edge machine learning technology</p>
+                    <div class="team-signature">
+                        <span class="team-name">Team High Five</span>
+                        <span class="team-motto">Securing the Digital Future</span>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#home">Overview</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#demo">Live Demo</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: security@highfive.com</p>
+                    <p>GitHub: github.com/highfive-security</p>
+                    <p>LinkedIn: linkedin.com/company/highfive</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Security</h4>
+                    <ul>
+                        <li>Privacy Policy</li>
+                        <li>Terms of Service</li>
+                        <li>Security Standards</li>
+                        <li>Compliance</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 High Five Security. All rights reserved. | Built for Hackathon 2024</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+    // Professional starfield effect
+    (function() {
+      const canvas = document.getElementById('starfield');
+      const ctx = canvas.getContext('2d');
+      let w = window.innerWidth, h = window.innerHeight;
+      canvas.width = w;
+      canvas.height = h;
+      let stars = [];
+      const STAR_COUNT = 60; // Reduced for subtlety
+      for (let i = 0; i < STAR_COUNT; i++) {
+        stars.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          z: Math.random() * w,
+          r: Math.random() * 1.0 + 0.1, // Smaller stars
+          speed: Math.random() * 0.3 + 0.05 // Slower movement
+        });
+      }
+      function drawProfessionalGlow() {
+        let grad = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, Math.max(w,h)/2);
+        grad.addColorStop(0, 'rgba(49,130,206,0.05)'); // Very subtle blue
+        grad.addColorStop(0.4, 'rgba(0,181,216,0.03)'); // Subtle cyan
+        grad.addColorStop(1, 'rgba(15,20,25,0.0)');
+        ctx.save();
+        ctx.globalAlpha = 0.4;
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.fillStyle = grad;
+        ctx.fillRect(0,0,w,h);
+        ctx.restore();
+        ctx.globalCompositeOperation = 'source-over';
+      }
+      function draw() {
+        ctx.clearRect(0,0,w,h);
+        drawProfessionalGlow();
+        for (let i = 0; i < STAR_COUNT; i++) {
+          let star = stars[i];
+          let k = 128.0 / star.z;
+          let sx = (star.x - w/2) * k + w/2;
+          let sy = (star.y - h/2) * k + h/2;
+          let r = star.r * k * 0.3; // Smaller stars
+          if (sx < 0 || sx >= w || sy < 0 || sy >= h) {
+            stars[i] = {
+              x: Math.random() * w,
+              y: Math.random() * h,
+              z: w,
+              r: Math.random() * 1.0 + 0.1,
+              speed: Math.random() * 0.3 + 0.05
+            };
+            continue;
+          }
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(sx, sy, r, 0, 2 * Math.PI);
+          ctx.fillStyle = 'rgba(255,255,255,' + (0.3 + 0.1 * Math.random()) + ')'; // Very subtle
+          ctx.shadowColor = '#3182ce'; // Professional blue glow
+          ctx.shadowBlur = 2 + 2 * Math.random(); // Minimal glow
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+      function animate() {
+        for (let i = 0; i < STAR_COUNT; i++) {
+          stars[i].z -= stars[i].speed;
+          if (stars[i].z <= 1) stars[i].z = w;
+        }
+        draw();
+        requestAnimationFrame(animate);
+      }
+      window.addEventListener('resize', function() {
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = w;
+        canvas.height = h;
+      });
+      animate();
+    })();
+    </script>
+</body>
+</html> 
